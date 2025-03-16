@@ -15,6 +15,17 @@ export function Post({ author, content, publishedAt }) {
 		addSuffix: true
 	});
 
+	const contentMap = {
+		paragraph: (item, index) => <p key={index}>{item.content}</p>,
+		link: (item, index) => (
+			<p key={index}>
+				<a href={item.url}>{item.content}</a>
+			</p>
+		),
+		title: (item, index) => <h1 key={index}>{item.content}</h1>,
+		default: (item, index) => <span key={index}>{item.content}</span>,
+	};
+
 	return (
 		<article className={styles.post}>
 			<header>
@@ -31,14 +42,8 @@ export function Post({ author, content, publishedAt }) {
 
 			<div className={styles.content}>
 				{content.map((item, index) => {
-					if(item.type === 'paragraph') {
-						return <p key={index}>{item.content}</p>;
-					}
-					if (item.type === 'link') {
-						return <p key={index}><a href={item.url}>{item.content}</a></p>;
-					}
-					if (item.type === 'title')
-						return <h1 key={index}>{item.content}</h1>;
+					const Component = contentMap[item.type] ?? contentMap.default
+					return Component(item, index);
 				}
 				)}
 			</div>
