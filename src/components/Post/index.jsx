@@ -1,31 +1,46 @@
 import { Avatar } from '../Avatar';
 import { Comment } from '../Comment';
 import styles from './Post.module.css';
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
-export function Post() {
+export function Post({ author, content, publishedAt }) {
+	const { name, avatar, role } = author;
+	const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+		locale: ptBR,
+	});
+
+	const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+		locale: ptBR,
+		addSuffix: true
+	});
+
 	return (
 		<article className={styles.post}>
 			<header>
 				<div className={styles.author}>
-					<Avatar src="https://avatars.githubusercontent.com/u/86618553?v=4" />
+					<Avatar src={avatar} />
 					<div className={styles.authorInfo}>
-						<strong>Ilnara Ackermann</strong>
-						<span>Web Developer</span>
+						<strong>{name}</strong>
+						<span>{role}</span>
 					</div>
 				</div>
 
-				<time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:00">Publicado há 1h</time>
+				<time title={publishedDateFormatted} dateTime={publishedAt}>{publishedDateRelativeToNow}</time>
 			</header>
 
 			<div className={styles.content}>
-				<p>Lorem, ipsum dolor. 👋</p>
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis voluptas qui natus autem laudantium alias molestias pariatur libero asperiores. Deserunt ea odio nemo quo. Aperiam placeat id dolorem magni. Voluptatibus! 🚀</p>
-				<p><a href="">lorem.ipsum/dolor</a></p>
-				<p>
-					<a href="">#novoprojeto</a>{' '}
-					<a href="">#nlw</a>{' '}
-					<a href="">#rocketseat</a>
-				</p>
+				{content.map((item, index) => {
+					if(item.type === 'paragraph') {
+						return <p key={index}>{item.content}</p>;
+					}
+					if (item.type === 'link') {
+						return <p key={index}><a href={item.url}>{item.content}</a></p>;
+					}
+					if (item.type === 'title')
+						return <h1 key={index}>{item.content}</h1>;
+				}
+				)}
 			</div>
 
 			<form className={styles.commentForm}>

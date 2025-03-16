@@ -1,6 +1,7 @@
 import { Post } from "./components/Post";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
+import postData from "./components/Post/postData.json"
 
 import styles from "./App.module.css";
 import "./globals.css";
@@ -13,14 +14,9 @@ function App() {
 			<div className={styles.wrapper}>
 				<Sidebar />
 				<main>
-					<Post
-						author="Ilnara Ackermann"
-						content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-					/>
-					<Post
-						author="Ilnara Ackermann"
-						content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-					/>
+					{postData.map((post) => (
+						<Post key={post.id} {...post} />
+					))}
 				</main>
 			</div>
 		</div>
