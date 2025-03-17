@@ -30,19 +30,7 @@
 			{
 				"type": "link",
 				"content": "First Post Title",
-        "url": "#"
-			},
-			{
-				"type": "paragraph",
-				"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-			},
-			{
-				"type": "paragraph",
-				"content": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-			},
-			{
-				"type": "paragraph",
-				"content": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+				"url": "#"
 			}
 		],
 		"publishedAt": "2025-03-16T18:23:45Z"
@@ -78,7 +66,7 @@
 			{
 				"type": "link",
 				"content": "Second Post Title",
-        "url": "#"
+				"url": "#"
 			}
 		],
 		"publishedAt": "2025-03-15T14:37:22Z"
@@ -145,7 +133,7 @@
 			{
 				"type": "link",
 				"content": "Fourth Post Title",
-        "url": "#"
+				"url": "#"
 			}
 		],
 		"publishedAt": "2025-03-12T11:12:34Z"
